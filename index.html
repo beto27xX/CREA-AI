@@ -1,0 +1,2656 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CREA AI - Fotos profesionales con modelos de inteligencia artificial para marcas de ropa. Sin fotógrafos, sin estudios, sin contratar modelos." />
+  <title>CREA AI — Fotos profesionales con modelos IA</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       CONFIGURACIÓN GLOBAL — Edita aquí los colores y tipografía
+    ============================================================ */
+    :root {
+      --green:       #25D366;   /* Verde WhatsApp principal */
+      --green-dark:  #128C7E;   /* Verde oscuro para hover */
+      --green-light: #DCF8C6;   /* Verde muy claro para fondos */
+      --black:       #111111;
+      --gray-dark:   #444444;
+      --gray-mid:    #888888;
+      --gray-light:  #F5F5F5;
+      --white:       #FFFFFF;
+      --border:      #E8E8E8;
+      --shadow:      0 4px 24px rgba(0,0,0,0.08);
+      --shadow-lg:   0 8px 40px rgba(0,0,0,0.12);
+      --radius:      14px;
+      --radius-sm:   8px;
+      --font:        'Inter', sans-serif;
+    }
+
+    /* ============================================================
+       RESET Y BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    input, select, textarea, button { font-family: var(--font); }
+
+    /* ============================================================
+       UTILIDADES
+    ============================================================ */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .section {
+      padding: 96px 0;
+    }
+    .section-label {
+      display: inline-block;
+      background: var(--green-light);
+      color: var(--green-dark);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--black);
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 17px;
+      color: var(--gray-dark);
+      max-width: 540px;
+      line-height: 1.7;
+    }
+    .text-center { text-align: center; }
+    .text-center .section-sub { margin: 0 auto; }
+
+    /* Botón WhatsApp principal */
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green);
+      color: var(--white);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 32px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+      white-space: nowrap;
+    }
+    .btn-wa:hover {
+      background: var(--green-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(37, 211, 102, 0.45);
+    }
+    .btn-wa svg { flex-shrink: 0; }
+
+    /* Botón secundario outline */
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--black);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 100px;
+      border: 2px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--green); color: var(--green); }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    .navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+    .nav-logo {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: var(--black);
+    }
+    .nav-logo span { color: var(--green); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gray-dark);
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-links a:hover { color: var(--black); background: var(--gray-light); }
+    .nav-cta {
+      background: var(--green);
+      color: var(--white) !important;
+      padding: 10px 20px !important;
+      border-radius: 100px !important;
+    }
+    .nav-cta:hover { background: var(--green-dark) !important; color: var(--white) !important; }
+    /* Hamburguesa */
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .nav-burger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--black);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .nav-mobile {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      padding: 16px 24px 20px;
+      border-top: 1px solid var(--border);
+    }
+    .nav-mobile a {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--gray-dark);
+      padding: 12px 16px;
+      border-radius: 10px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-mobile a:hover { background: var(--gray-light); color: var(--black); }
+    .nav-mobile.open { display: flex; }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      padding-top: 140px;
+      padding-bottom: 96px;
+      background: linear-gradient(160deg, #f9fffe 0%, #ffffff 60%);
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green-light);
+      border: 1px solid #b3eccc;
+      color: var(--green-dark);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .hero-badge-dot {
+      width: 7px; height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.3); }
+    }
+    .hero-title {
+      font-size: clamp(32px, 5vw, 54px);
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--black);
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+    .hero-title .highlight { color: var(--green); }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--gray-dark);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 48px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+    .hero-stat-num {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--black);
+      letter-spacing: -0.5px;
+    }
+    .hero-stat-label {
+      font-size: 13px;
+      color: var(--gray-mid);
+      font-weight: 500;
+    }
+    /* Galería hero */
+    .hero-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 12px;
+    }
+    .hero-gallery-main {
+      grid-column: 1 / -1;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+    .hero-gallery-main img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+    .hero-gallery-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+    .hero-gallery-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .gallery-tag {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.65);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 100px;
+      backdrop-filter: blur(4px);
+    }
+    .hero-float-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: var(--green);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 100px;
+    }
+
+    /* ============================================================
+       CÓMO FUNCIONA
+    ============================================================ */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 56px;
+      position: relative;
+    }
+    .steps-grid::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(16.66% + 16px);
+      right: calc(16.66% + 16px);
+      height: 2px;
+      background: linear-gradient(to right, var(--green), var(--green-dark));
+      z-index: 0;
+    }
+    .step-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .step-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .step-number {
+      width: 56px; height: 56px;
+      background: var(--green);
+      color: var(--white);
+      font-size: 22px;
+      font-weight: 800;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      box-shadow: 0 4px 14px rgba(37,211,102,0.35);
+    }
+    .step-icon {
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+    .step-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 10px;
+    }
+    .step-desc {
+      font-size: 14px;
+      color: var(--gray-dark);
+      line-height: 1.6;
+    }
+    .step-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      margin-top: 16px;
+    }
+    .step-tag {
+      font-size: 12px;
+      font-weight: 500;
+      background: var(--gray-light);
+      color: var(--gray-dark);
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    /* ============================================================
+       EJEMPLOS (GALERÍA)
+    ============================================================ */
+    .examples-bg { background: var(--gray-light); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .gallery-item {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .gallery-item:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    /* Contenedor de imagen con proporción 4:5 estilo catálogo de moda */
+    .gallery-item-img-wrap {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-item img,
+    .gallery-item .modelo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      border-radius: 0;
+      transition: transform 0.35s;
+    }
+    .gallery-item:hover img,
+    .gallery-item:hover .modelo-img { transform: scale(1.04); }
+    .gallery-item-info {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .gallery-item-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--black);
+    }
+    .gallery-item-type {
+      font-size: 12px;
+      background: var(--green-light);
+      color: var(--green-dark);
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-weight: 600;
+    }
+
+    /* ============================================================
+       PRECIOS
+    ============================================================ */
+    .price-hero-box {
+      background: var(--black);
+      color: var(--white);
+      border-radius: var(--radius);
+      padding: 48px;
+      text-align: center;
+      max-width: 640px;
+      margin: 56px auto 0;
+    }
+    .price-hero-tag {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .price-hero-main {
+      font-size: 64px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .price-hero-usd {
+      font-size: 18px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 32px;
+    }
+    .price-selector-label {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+    .price-options {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .price-option {
+      padding: 12px 22px;
+      border-radius: 100px;
+      border: 2px solid rgba(255,255,255,0.2);
+      background: transparent;
+      color: rgba(255,255,255,0.7);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .price-option:hover, .price-option.active {
+      border-color: var(--green);
+      background: var(--green);
+      color: var(--white);
+    }
+    .price-total-display {
+      background: rgba(255,255,255,0.07);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      margin-bottom: 28px;
+    }
+    .price-total-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 15px;
+    }
+    .price-total-row + .price-total-row {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .price-total-amount {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--green);
+    }
+
+    /* ============================================================
+       FORMULARIO DE COMPRA
+    ============================================================ */
+    .buy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 56px;
+      align-items: start;
+    }
+    .buy-form-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      box-shadow: var(--shadow);
+    }
+    .form-group { margin-bottom: 22px; }
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+    .form-input, .form-select {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      color: var(--black);
+      background: var(--white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      appearance: none;
+    }
+    .form-input:focus, .form-select:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(37,211,102,0.12);
+    }
+    .form-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23888' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+      cursor: pointer;
+    }
+    /* Upload */
+    .upload-zone {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-sm);
+      padding: 32px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+    }
+    .upload-zone:hover, .upload-zone.dragover {
+      border-color: var(--green);
+      background: var(--green-light);
+    }
+    .upload-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+    .upload-icon { font-size: 32px; margin-bottom: 8px; }
+    .upload-text { font-size: 14px; color: var(--gray-dark); }
+    .upload-text strong { color: var(--green); }
+    .upload-preview {
+      display: none;
+      margin-top: 12px;
+    }
+    .upload-preview img {
+      width: 100%;
+      max-height: 180px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+    }
+    /* Radio entrega */
+    .radio-group { display: flex; gap: 12px; }
+    .radio-card {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .radio-card input[type="radio"] { accent-color: var(--green); cursor: pointer; }
+    .radio-card:has(input:checked) {
+      border-color: var(--green);
+      background: var(--green-light);
+    }
+    /* Email field condicional */
+    #email-field { transition: all 0.3s; }
+    .hidden { display: none !important; }
+    /* Buy sidebar */
+    .buy-sidebar { position: sticky; top: 88px; }
+    .buy-summary-card {
+      background: var(--gray-light);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+    .summary-title {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--gray-mid);
+      margin-bottom: 20px;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: var(--gray-dark);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .summary-row:last-of-type { border-bottom: none; }
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--black);
+      padding-top: 16px;
+      margin-top: 8px;
+    }
+    .summary-total-usd {
+      font-size: 12px;
+      color: var(--gray-mid);
+      font-weight: 400;
+    }
+
+    /* ============================================================
+       PAGO
+    ============================================================ */
+    .payment-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .pay-tab {
+      flex: 1;
+      min-width: 120px;
+      padding: 14px 20px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--white);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+      color: var(--gray-dark);
+    }
+    .pay-tab:hover { border-color: var(--green); color: var(--green); }
+    .pay-tab.active {
+      border-color: var(--green);
+      background: var(--green);
+      color: var(--white);
+    }
+    .pay-panel { display: none; }
+    .pay-panel.active { display: block; }
+    /* Panel Yape / Plin */
+    .qr-card {
+      background: var(--gray-light);
+      border-radius: var(--radius);
+      padding: 36px;
+      text-align: center;
+      max-width: 380px;
+    }
+    .qr-placeholder {
+      width: 160px;
+      height: 160px;
+      background: #fff;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+    }
+    .qr-number {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--black);
+      margin-bottom: 8px;
+    }
+    .qr-desc {
+      font-size: 14px;
+      color: var(--gray-dark);
+      line-height: 1.6;
+    }
+    .qr-steps {
+      margin-top: 24px;
+      text-align: left;
+    }
+    .qr-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--gray-dark);
+      margin-bottom: 10px;
+    }
+    .qr-step-num {
+      width: 22px;
+      height: 22px;
+      background: var(--green);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    /* Tarjeta simulada */
+    .card-sim {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      border-radius: 16px;
+      padding: 28px 32px;
+      max-width: 380px;
+      color: #fff;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+    .card-sim-chip { font-size: 28px; margin-bottom: 24px; }
+    .card-sim-number {
+      font-size: 18px;
+      letter-spacing: 4px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      opacity: 0.85;
+    }
+    .card-sim-footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      opacity: 0.7;
+    }
+    .card-form-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 14px;
+      max-width: 380px;
+    }
+
+    /* ============================================================
+       CONFIRMACIÓN POST-PAGO
+    ============================================================ */
+    .confirm-section {
+      display: none;
+      background: var(--green-light);
+      border: 2px solid #b3eccc;
+      border-radius: var(--radius);
+      padding: 56px 40px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .confirm-section.visible { display: block; }
+    .confirm-icon { font-size: 56px; margin-bottom: 16px; }
+    .confirm-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--black);
+      margin-bottom: 12px;
+    }
+    .confirm-desc {
+      font-size: 16px;
+      color: var(--gray-dark);
+      max-width: 480px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       BENEFICIOS
+    ============================================================ */
+    .benefits-bg { background: var(--black); color: var(--white); }
+    .benefits-bg .section-title { color: var(--white); }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 56px;
+      align-items: center;
+    }
+    .benefit-list { display: flex; flex-direction: column; gap: 18px; }
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .benefit-check {
+      width: 36px;
+      height: 36px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 16px;
+    }
+    .benefit-content {}
+    .benefit-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .benefit-desc { font-size: 14px; color: rgba(255,255,255,0.6); }
+    /* Comparación */
+    .compare-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+    .compare-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .compare-row:last-of-type { border-bottom: none; }
+    .compare-label { font-size: 14px; color: rgba(255,255,255,0.6); }
+    .compare-old {
+      font-size: 14px;
+      color: #ff6b6b;
+      text-decoration: line-through;
+      font-weight: 600;
+    }
+    .compare-new {
+      font-size: 15px;
+      color: var(--green);
+      font-weight: 800;
+    }
+    .compare-savings {
+      background: var(--green);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    /* ============================================================
+       CONTACTO
+    ============================================================ */
+    .contact-box {
+      background: var(--gray-light);
+      border-radius: var(--radius);
+      padding: 72px 40px;
+      text-align: center;
+    }
+    .contact-box .section-title { margin-bottom: 20px; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer {
+      background: var(--black);
+      color: rgba(255,255,255,0.6);
+      padding: 48px 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--white);
+    }
+    .footer-logo span { color: var(--green); }
+    .footer-desc {
+      font-size: 14px;
+      margin-top: 6px;
+    }
+    .footer-wa {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 12px 22px;
+      border-radius: 100px;
+      transition: background 0.2s;
+    }
+    .footer-wa:hover { background: var(--green-dark); }
+    .footer-copy {
+      width: 100%;
+      text-align: center;
+      font-size: 13px;
+      margin-top: 32px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* ============================================================
+       GALERÍA DE MODELOS IA
+    ============================================================ */
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .model-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s, box-shadow 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+    .model-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .model-card-img-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    /* Imagen genérica .modelo-img — dentro de contenedor aspect-ratio */
+    .modelo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 0;
+      display: block;
+      transition: transform 0.35s;
+    }
+    /* Contenedor de imagen en tarjetas de modelos IA — proporción 4:5 catálogo */
+    .model-card-img-wrap {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      position: relative;
+    }
+    .model-card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 0;
+      display: block;
+      transition: transform 0.35s;
+    }
+    .model-card:hover .model-card-img-wrap img { transform: scale(1.04); }
+    .model-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 100px;
+      backdrop-filter: blur(6px);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .model-card-body {
+      padding: 20px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+    .model-card-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--black);
+    }
+    .model-card-desc {
+      font-size: 13px;
+      color: var(--gray-dark);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .model-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .model-card-tag {
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--gray-light);
+      color: var(--gray-dark);
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+    .btn-model {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--green);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 12px 20px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      width: 100%;
+    }
+    .btn-model:hover { background: var(--green-dark); transform: translateY(-1px); }
+
+    /* ============================================================
+       SECCIÓN CONFIANZA (POR QUÉ USAR CREA AI)
+    ============================================================ */
+    .trust-bg { background: var(--gray-light); }
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .trust-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .trust-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .trust-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--green-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .trust-icon svg { width: 28px; height: 28px; }
+    .trust-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 8px;
+    }
+    .trust-desc {
+      font-size: 13px;
+      color: var(--gray-dark);
+      line-height: 1.6;
+    }
+    @media (max-width: 900px) {
+      .models-grid { grid-template-columns: repeat(2, 1fr); }
+      .trust-grid  { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .models-grid { grid-template-columns: 1fr; }
+      .trust-grid  { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       ANIMACIONES AL HACER SCROLL
+    ============================================================ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-up-d1 { transition-delay: 0.1s; }
+    .fade-up-d2 { transition-delay: 0.2s; }
+    .fade-up-d3 { transition-delay: 0.3s; }
+
+    /* ============================================================
+       RESPONSIVE — MÓVIL
+    ============================================================ */
+    @media (max-width: 900px) {
+      .section { padding: 72px 0; }
+      .hero { padding-top: 110px; padding-bottom: 72px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .hero-gallery { display: none; }
+      .steps-grid { grid-template-columns: 1fr; gap: 16px; }
+      .steps-grid::before { display: none; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .buy-grid { grid-template-columns: 1fr; }
+      .buy-sidebar { position: static; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .card-form-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .hero-stats { gap: 20px; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .price-hero-box { padding: 36px 24px; }
+      .price-hero-main { font-size: 48px; }
+      .buy-form-card { padding: 28px 20px; }
+      .contact-box { padding: 48px 24px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .card-form-grid { grid-template-columns: 1fr; }
+      .payment-tabs { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       CONFIGURACIÓN — EDITAR AQUÍ TUS DATOS
+  ============================================================
+
+  Para cambiar el número de WhatsApp, Yape o Plin,
+  edita las variables al inicio del bloque <script> al final de esta página.
+
+  ============================================================ -->
+
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#inicio" class="nav-logo">CREA <span>AI</span></a>
+
+        <ul class="nav-links">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#como-funciona">Cómo funciona</a></li>
+          <li><a href="#modelos">Modelos</a></li>
+          <li><a href="#ejemplos">Ejemplos</a></li>
+          <li><a href="#precios">Precios</a></li>
+          <li><a href="#comprar">Comprar</a></li>
+          <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+        </ul>
+
+        <button class="nav-burger" id="burger" aria-label="Abrir menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <!-- Menú móvil -->
+    <div class="nav-mobile" id="nav-mobile">
+      <a href="#inicio" onclick="closeMobile()">Inicio</a>
+      <a href="#como-funciona" onclick="closeMobile()">Cómo funciona</a>
+      <a href="#modelos" onclick="closeMobile()">Modelos</a>
+      <a href="#ejemplos" onclick="closeMobile()">Ejemplos</a>
+      <a href="#precios" onclick="closeMobile()">Precios</a>
+      <a href="#comprar" onclick="closeMobile()">Comprar</a>
+      <a href="#contacto" onclick="closeMobile()">Contacto</a>
+    </div>
+  </nav>
+
+
+  <!-- ============================================================
+       HERO SECTION
+  ============================================================ -->
+  <section class="hero" id="inicio">
+    <div class="container">
+      <div class="hero-inner">
+
+        <!-- Texto -->
+        <div>
+          <div class="hero-badge fade-up">
+            <span class="hero-badge-dot"></span>
+            IA disponible ahora
+          </div>
+
+          <h1 class="hero-title fade-up fade-up-d1">
+            Crea fotos <span class="highlight">profesionales</span><br>
+            de tu ropa con modelos IA
+          </h1>
+
+          <p class="hero-sub fade-up fade-up-d2">
+            No pagues fotógrafos ni modelos. Usa inteligencia artificial para mostrar tu ropa con modelos profesionales listos para vender.
+          </p>
+
+          <div class="hero-actions fade-up fade-up-d3">
+            <button type="button" onclick="abrirWhatsApp()" class="btn-wa">
+              <!-- Ícono WhatsApp -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.526 5.847L.057 23.883a.5.5 0 00.609.61l6.082-1.596A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.807 9.807 0 01-5.035-1.385l-.36-.214-3.733.978.997-3.645-.234-.374A9.769 9.769 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+              </svg>
+              Crear mis fotos ahora
+            </button>
+            <a href="#precios" class="btn-outline">Ver precios</a>
+          </div>
+
+          <div class="hero-stats fade-up">
+            <div>
+              <div class="hero-stat-num">24h</div>
+              <div class="hero-stat-label">Entrega rápida</div>
+            </div>
+            <div>
+              <div class="hero-stat-num">S/5</div>
+              <div class="hero-stat-label">Desde solo</div>
+            </div>
+            <div>
+              <div class="hero-stat-num">6+</div>
+              <div class="hero-stat-label">Tipos de modelo</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Galería decorativa hero -->
+        <div class="hero-gallery fade-up fade-up-d2">
+          <div class="hero-gallery-main">
+            <img
+              id="img-hero-principal"
+              src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=680&h=280&fit=crop&crop=top"
+              alt="Modelo IA mujer elegante con vestido en sesion de moda profesional"
+              loading="eager"
+              onerror="this.src='https://placehold.co/680x280?text=Mujer+Elegante'"
+            />
+            <span class="gallery-tag">Mujer Elegante</span>
+            <span class="hero-float-badge">IA</span>
+          </div>
+          <div class="hero-gallery-card">
+            <img
+              id="img-hero-streetwear"
+              src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=320&h=160&fit=crop&crop=top"
+              alt="Modelo hombre streetwear con ropa urbana moderna"
+              loading="eager"
+              onerror="this.src='https://placehold.co/320x160?text=Streetwear'"
+            />
+            <span class="gallery-tag">Streetwear</span>
+          </div>
+          <div class="hero-gallery-card">
+            <img
+              id="img-hero-fitness"
+              src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=320&h=160&fit=crop&crop=top"
+              alt="Modelo fitness mujer con ropa deportiva de alta calidad"
+              loading="eager"
+              onerror="this.src='https://placehold.co/320x160?text=Fitness'"
+            />
+            <span class="gallery-tag">Fitness</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CÓMO FUNCIONA
+  ============================================================ -->
+  <section class="section" id="como-funciona">
+    <div class="container">
+      <div class="text-center fade-up">
+        <span class="section-label">Proceso simple</span>
+        <h2 class="section-title">3 pasos para tener tus fotos</h2>
+        <p class="section-sub">Sin complicaciones. Solo sube tu ropa y elige el modelo.</p>
+      </div>
+
+      <div class="steps-grid">
+
+        <div class="step-card fade-up fade-up-d1">
+          <div class="step-number">1</div>
+          <div class="step-icon">📸</div>
+          <div class="step-title">Sube la foto de tu ropa</div>
+          <p class="step-desc">Toma una foto simple de la prenda sobre una superficie plana o cuelga. No necesita ser perfecta.</p>
+        </div>
+
+        <div class="step-card fade-up fade-up-d2">
+          <div class="step-number">2</div>
+          <div class="step-icon">🤖</div>
+          <div class="step-title">Escoge el tipo de modelo IA</div>
+          <p class="step-desc">Selecciona el estilo de modelo que mejor encaje con tu marca.</p>
+          <div class="step-tags">
+            <span class="step-tag">Mujer elegante</span>
+            <span class="step-tag">Streetwear</span>
+            <span class="step-tag">Casual</span>
+            <span class="step-tag">Fitness</span>
+            <span class="step-tag">Hombre moderno</span>
+            <span class="step-tag">Influencer</span>
+          </div>
+        </div>
+
+        <div class="step-card fade-up fade-up-d3">
+          <div class="step-number">3</div>
+          <div class="step-icon">✨</div>
+          <div class="step-title">Recibe tus fotos listas para vender</div>
+          <p class="step-desc">En 24 a 48 horas recibes tus fotos profesionales por WhatsApp o Email. Listas para Instagram y tu tienda.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       EJEMPLOS (GALERÍA)
+  ============================================================ -->
+  <section class="section examples-bg" id="ejemplos">
+    <div class="container">
+      <div class="text-center fade-up">
+        <span class="section-label">Ejemplos reales</span>
+        <h2 class="section-title">Modelos IA usando tu ropa</h2>
+        <p class="section-sub">Distintos estilos para que tu marca destaque en cualquier plataforma.</p>
+      </div>
+
+      <div class="gallery-grid">
+
+        <!-- Galería: Mujer Elegante — cuerpo completo, vestido -->
+        <div class="gallery-item fade-up fade-up-d1">
+          <div class="gallery-item-img-wrap">
+            <img
+              id="img-ejemplo-mujer-elegante"
+              class="modelo-img"
+              src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=480&h=600&fit=crop&crop=top"
+              alt="Modelo mujer elegante cuerpo completo vestido de moda formal catalogo ropa"
+              loading="lazy"
+              onerror="this.src='https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=480&h=600&fit=crop&crop=top'"
+            />
+          </div>
+          <div class="gallery-item-info">
+            <span class="gallery-item-label">Mujer Elegante</span>
+            <span class="gallery-item-type">Moda formal</span>
+          </div>
+        </div>
+
+        <!-- Galería: Streetwear — outfit completo urbano -->
+        <div class="gallery-item fade-up fade-up-d2">
+          <div class="gallery-item-img-wrap">
+            <img
+              id="img-ejemplo-streetwear"
+              class="modelo-img"
+              src="https://images.unsplash.com/photo-1520975922203-b5a49c2f7c87?w=480&h=600&fit=crop&crop=top"
+              alt="Modelo streetwear cuerpo completo ropa urbana moderna catalogo de moda"
+              loading="lazy"
+              onerror="this.src='https://images.unsplash.com/photo-1544441893-675973e31985?w=480&h=600&fit=crop&crop=top'"
+            />
+          </div>
+          <div class="gallery-item-info">
+            <span class="gallery-item-label">Streetwear</span>
+            <span class="gallery-item-type">Urbano</span>
+          </div>
+        </div>
+
+        <!-- Galería: Casual — jeans y blusa, cuerpo completo -->
+        <div class="gallery-item fade-up fade-up-d3">
+          <div class="gallery-item-img-wrap">
+            <img
+              id="img-ejemplo-casual"
+              class="modelo-img"
+              src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=480&h=600&fit=crop&crop=top"
+              alt="Modelo casual cuerpo completo jeans blusa outfit relajado tienda online"
+              loading="lazy"
+              onerror="this.src='https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=480&h=600&fit=crop&crop=top'"
+            />
+          </div>
+          <div class="gallery-item-info">
+            <span class="gallery-item-label">Casual</span>
+            <span class="gallery-item-type">Día a día</span>
+          </div>
+        </div>
+
+        <!-- Galería: Fitness — ropa deportiva, cuerpo completo -->
+        <div class="gallery-item fade-up fade-up-d1">
+          <div class="gallery-item-img-wrap">
+            <img
+              id="img-ejemplo-fitness"
+              class="modelo-img"
+              src="https://images.unsplash.com/photo-1571019613914-85f342c6a11e?w=480&h=600&fit=crop&crop=top"
+              alt="Modelo fitness cuerpo completo ropa deportiva leggings top marcas activas"
+              loading="lazy"
+              onerror="this.src='https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?w=480&h=600&fit=crop&crop=top'"
+            />
+          </div>
+          <div class="gallery-item-info">
+            <span class="gallery-item-label">Fitness</span>
+            <span class="gallery-item-type">Deportivo</span>
+          </div>
+        </div>
+
+        <!-- Galería: Hombre Moderno — semi-formal, cuerpo completo -->
+        <div class="gallery-item fade-up fade-up-d2">
+          <div class="gallery-item-img-wrap">
+            <img
+              id="img-ejemplo-hombre-moderno"
+              class="modelo-img"
+              src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=480&h=600&fit=crop&crop=top"
+              alt="Modelo hombre moderno cuerpo completo outfit semi formal catalogo masculino"
+              loading="lazy"
+              onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=480&h=600&fit=crop&crop=top'"
+            />
+          </div>
+          <div class="gallery-item-info">
+            <span class="gallery-item-label">Hombre Moderno</span>
+            <span class="gallery-item-type">Masculino</span>
+          </div>
+        </div>
+
+        <!-- Galería: Influencer / Instagram — look completo lifestyle -->
+        <div class="gallery-item fade-up fade-up-d3">
+          <div class="gallery-item-img-wrap">
+            <img
+              id="img-ejemplo-influencer"
+              class="modelo-img"
+              src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=480&h=600&fit=crop&crop=top"
+              alt="Modelo influencer Instagram cuerpo completo outfit colorido lifestyle moda"
+              loading="lazy"
+              onerror="this.src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=480&h=600&fit=crop&crop=top'"
+            />
+          </div>
+          <div class="gallery-item-info">
+            <span class="gallery-item-label">Influencer</span>
+            <span class="gallery-item-type">Instagram</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       GALERÍA DE MODELOS IA
+  ============================================================ -->
+  <section class="section" id="modelos">
+    <div class="container">
+      <div class="text-center fade-up">
+        <span class="section-label">Tipos de modelo</span>
+        <h2 class="section-title">Elige el modelo IA perfecto para tu ropa</h2>
+        <p class="section-sub">Cada estilo está diseñado para un tipo de marca y audiencia diferente.</p>
+      </div>
+
+      <div class="models-grid">
+
+        <!-- Mujer Elegante — vestido completo, moda formal -->
+        <div class="model-card fade-up fade-up-d1">
+          <div class="model-card-img-wrap">
+            <img
+              id="img-modelo-mujer-elegante"
+              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=340&fit=crop&crop=center"
+              alt="Modelo mujer elegante cuerpo completo vestido ropa formal sesion catalogo moda"
+              loading="lazy"
+              onerror="this.src='https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=400&h=340&fit=crop'"
+            />
+            <span class="model-badge">Mujer Elegante</span>
+          </div>
+          <div class="model-card-body">
+            <div class="model-card-name">Mujer Elegante</div>
+            <div class="model-card-desc">Ideal para marcas de moda formal, vestidos, blazers y ropa de ocasión. Transmite sofisticación.</div>
+            <div class="model-card-tags">
+              <span class="model-card-tag">Moda formal</span>
+              <span class="model-card-tag">Vestidos</span>
+              <span class="model-card-tag">Blazers</span>
+            </div>
+            <button class="btn-model" onclick="usarModelo('Mujer Elegante')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+              Crear fotos con este modelo
+            </button>
+          </div>
+        </div>
+
+        <!-- Hombre Moderno — outfit completo semi-formal -->
+        <div class="model-card fade-up fade-up-d2">
+          <div class="model-card-img-wrap">
+            <img
+              id="img-modelo-hombre-moderno"
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=340&fit=crop&crop=center"
+              alt="Modelo hombre moderno cuerpo completo camisa pantalon look masculino catalogo"
+              loading="lazy"
+              onerror="this.src='https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=400&h=340&fit=crop'"
+            />
+            <span class="model-badge">Hombre Moderno</span>
+          </div>
+          <div class="model-card-body">
+            <div class="model-card-name">Hombre Moderno</div>
+            <div class="model-card-desc">Perfecto para camisas, pantalones, polos y ropa masculina casual o semi-formal.</div>
+            <div class="model-card-tags">
+              <span class="model-card-tag">Masculino</span>
+              <span class="model-card-tag">Casual</span>
+              <span class="model-card-tag">Semi-formal</span>
+            </div>
+            <button class="btn-model" onclick="usarModelo('Hombre Moderno')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+              Crear fotos con este modelo
+            </button>
+          </div>
+        </div>
+
+        <!-- Streetwear — ropa urbana, cuerpo completo -->
+        <div class="model-card fade-up fade-up-d3">
+          <div class="model-card-img-wrap">
+            <img
+              id="img-modelo-streetwear"
+              src="https://images.unsplash.com/photo-1544441893-675973e31985?w=400&h=340&fit=crop&crop=center"
+              alt="Modelo streetwear cuerpo completo hoodie ropa urbana tendencia callejera"
+              loading="lazy"
+              onerror="this.src='https://images.unsplash.com/photo-1520975922203-b5a49c2f7c87?w=400&h=340&fit=crop'"
+            />
+            <span class="model-badge">Streetwear</span>
+          </div>
+          <div class="model-card-body">
+            <div class="model-card-name">Streetwear</div>
+            <div class="model-card-desc">Diseñado para marcas urbanas, hoodies, camisetas oversized y ropa de tendencia callejera.</div>
+            <div class="model-card-tags">
+              <span class="model-card-tag">Urbano</span>
+              <span class="model-card-tag">Hoodies</span>
+              <span class="model-card-tag">Oversized</span>
+            </div>
+            <button class="btn-model" onclick="usarModelo('Streetwear')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+              Crear fotos con este modelo
+            </button>
+          </div>
+        </div>
+
+        <!-- Fitness — ropa deportiva, cuerpo completo -->
+        <div class="model-card fade-up fade-up-d1">
+          <div class="model-card-img-wrap">
+            <img
+              id="img-modelo-fitness"
+              src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?w=400&h=340&fit=crop&crop=center"
+              alt="Modelo fitness cuerpo completo ropa deportiva leggings top entrenamiento marcas activas"
+              loading="lazy"
+              onerror="this.src='https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=340&fit=crop'"
+            />
+            <span class="model-badge">Fitness</span>
+          </div>
+          <div class="model-card-body">
+            <div class="model-card-name">Fitness</div>
+            <div class="model-card-desc">Ideal para ropa deportiva, leggings, tops, shorts de entrenamiento y marcas activas.</div>
+            <div class="model-card-tags">
+              <span class="model-card-tag">Deportivo</span>
+              <span class="model-card-tag">Leggings</span>
+              <span class="model-card-tag">Gym</span>
+            </div>
+            <button class="btn-model" onclick="usarModelo('Fitness')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+              Crear fotos con este modelo
+            </button>
+          </div>
+        </div>
+
+        <!-- Casual — jeans y basics, cuerpo completo -->
+        <div class="model-card fade-up fade-up-d2">
+          <div class="model-card-img-wrap">
+            <img
+              id="img-modelo-casual"
+              src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400&h=340&fit=crop&crop=center"
+              alt="Modelo casual cuerpo completo jeans blusa ropa diaria comoda tienda online"
+              loading="lazy"
+              onerror="this.src='https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=340&fit=crop'"
+            />
+            <span class="model-badge">Casual</span>
+          </div>
+          <div class="model-card-body">
+            <div class="model-card-name">Casual</div>
+            <div class="model-card-desc">Para el día a día. Jeans, blusas, polos y ropa cómoda que conecta con cualquier audiencia.</div>
+            <div class="model-card-tags">
+              <span class="model-card-tag">Día a día</span>
+              <span class="model-card-tag">Jeans</span>
+              <span class="model-card-tag">Básicos</span>
+            </div>
+            <button class="btn-model" onclick="usarModelo('Casual')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+              Crear fotos con este modelo
+            </button>
+          </div>
+        </div>
+
+        <!-- Influencer / Instagram — look completo para redes -->
+        <div class="model-card fade-up fade-up-d3">
+          <div class="model-card-img-wrap">
+            <img
+              id="img-modelo-influencer"
+              src="https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?w=400&h=340&fit=crop&crop=center"
+              alt="Modelo influencer Instagram cuerpo completo outfit colorido lifestyle redes sociales"
+              loading="lazy"
+              onerror="this.src='https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&h=340&fit=crop'"
+            />
+            <span class="model-badge">Influencer</span>
+          </div>
+          <div class="model-card-body">
+            <div class="model-card-name">Influencer / Instagram</div>
+            <div class="model-card-desc">Poses y estilo para redes sociales. Perfecto para campañas de Instagram y contenido viral.</div>
+            <div class="model-card-tags">
+              <span class="model-card-tag">Instagram</span>
+              <span class="model-card-tag">Redes sociales</span>
+              <span class="model-card-tag">Lifestyle</span>
+            </div>
+            <button class="btn-model" onclick="usarModelo('Influencer / Instagram')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+              Crear fotos con este modelo
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PRECIOS + CALCULADORA
+  ============================================================ -->
+  <section class="section" id="precios">
+    <div class="container">
+      <div class="text-center fade-up">
+        <span class="section-label">Precios</span>
+        <h2 class="section-title">Simple y transparente</h2>
+        <p class="section-sub">Paga solo por las fotos que necesitas. Sin suscripciones ni costos ocultos.</p>
+      </div>
+
+      <div class="price-hero-box fade-up">
+        <div class="price-hero-tag">Precio base</div>
+        <div class="price-hero-main" id="price-main">S/5</div>
+        <div class="price-hero-usd" id="price-usd">≈ $1.35 USD</div>
+
+        <div class="price-selector-label">Elige cuántas fotos quieres:</div>
+        <div class="price-options">
+          <button class="price-option active" data-fotos="4" onclick="selectFotos(this, 4)">4 fotos</button>
+          <button class="price-option" data-fotos="8" onclick="selectFotos(this, 8)">8 fotos</button>
+          <button class="price-option" data-fotos="12" onclick="selectFotos(this, 12)">12 fotos</button>
+          <button class="price-option" data-fotos="20" onclick="selectFotos(this, 20)">20 fotos</button>
+        </div>
+
+        <div class="price-total-display">
+          <div class="price-total-row">
+            <span>Fotos seleccionadas</span>
+            <span id="total-fotos">4 fotos</span>
+          </div>
+          <div class="price-total-row">
+            <span>Total en soles</span>
+            <span class="price-total-amount" id="total-soles">S/5.00</span>
+          </div>
+          <div class="price-total-row">
+            <span>Equivalente en dólares</span>
+            <span id="total-dollars">≈ $1.35 USD</span>
+          </div>
+        </div>
+
+        <button type="button" onclick="abrirWhatsApp()" id="price-wa-btn" class="btn-wa" style="justify-content:center; width:100%;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.526 5.847L.057 23.883a.5.5 0 00.609.61l6.082-1.596A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.807 9.807 0 01-5.035-1.385l-.36-.214-3.733.978.997-3.645-.234-.374A9.769 9.769 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+          </svg>
+          Pedir por WhatsApp
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECCIÓN COMPRAR (FORMULARIO)
+  ============================================================ -->
+  <section class="section examples-bg" id="comprar">
+    <div class="container">
+      <div class="text-center fade-up">
+        <span class="section-label">Haz tu pedido</span>
+        <h2 class="section-title">Comienza tu pedido</h2>
+        <p class="section-sub">Completa los datos y paga. Recibirás tus fotos en 24 a 48 horas.</p>
+      </div>
+
+      <div class="buy-grid fade-up">
+
+        <!-- Formulario -->
+        <div class="buy-form-card">
+          <form id="buy-form" onsubmit="submitOrder(event)">
+
+            <!-- Nombre -->
+            <div class="form-group">
+              <label class="form-label" for="user-name">Tu nombre *</label>
+              <input type="text" class="form-input" id="user-name" placeholder="Ej: Ana García" required />
+            </div>
+
+            <!-- Upload ropa -->
+            <div class="form-group">
+              <label class="form-label">Foto de tu ropa *</label>
+              <div class="upload-zone" id="upload-zone">
+                <input type="file" id="ropa-file" accept="image/*" onchange="previewImage(this)" />
+                <div class="upload-icon">📷</div>
+                <div class="upload-text">
+                  <strong>Haz clic o arrastra</strong> tu foto aquí<br>
+                  <span style="font-size:12px; color: var(--gray-mid);">JPG, PNG o WEBP · Máx 10MB</span>
+                </div>
+              </div>
+              <div class="upload-preview" id="upload-preview">
+                <img id="preview-img" src="" alt="Vista previa de la prenda cargada" />
+              </div>
+            </div>
+
+            <!-- Tipo de modelo -->
+            <div class="form-group">
+              <label class="form-label" for="modelo-type">Tipo de modelo IA *</label>
+              <select class="form-select" id="modelo-type" required>
+                <option value="">— Selecciona el estilo —</option>
+                <option value="mujer-elegante">Mujer Elegante</option>
+                <option value="streetwear">Streetwear</option>
+                <option value="casual">Casual</option>
+                <option value="fitness">Fitness</option>
+                <option value="hombre-moderno">Hombre Moderno</option>
+                <option value="influencer">Influencer / Instagram</option>
+              </select>
+            </div>
+
+            <!-- Cantidad fotos -->
+            <div class="form-group">
+              <label class="form-label" for="cantidad-fotos">Cantidad de fotos *</label>
+              <select class="form-select" id="cantidad-fotos" required onchange="updateSummary()">
+                <option value="4">4 fotos — S/5.00 (≈ $1.35)</option>
+                <option value="8">8 fotos — S/10.00 (≈ $2.70)</option>
+                <option value="12">12 fotos — S/15.00 (≈ $4.05)</option>
+                <option value="20">20 fotos — S/25.00 (≈ $6.75)</option>
+              </select>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label class="form-label" for="user-email">Correo electrónico *</label>
+              <input type="email" class="form-input" id="user-email" placeholder="tuemail@ejemplo.com" required />
+            </div>
+
+            <!-- Cómo recibir -->
+            <div class="form-group">
+              <label class="form-label">¿Cómo quieres recibir tus fotos? *</label>
+              <div class="radio-group">
+                <label class="radio-card">
+                  <input type="radio" name="delivery" value="whatsapp" checked onchange="toggleDelivery(this.value)" />
+                  📱 WhatsApp
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="delivery" value="email" onchange="toggleDelivery(this.value)" />
+                  ✉️ Email
+                </label>
+              </div>
+            </div>
+
+            <!-- WhatsApp número (condicional) -->
+            <div class="form-group" id="wa-number-field">
+              <label class="form-label" for="user-wa">Tu número de WhatsApp</label>
+              <input type="tel" class="form-input" id="user-wa" placeholder="Ej: 987654321" />
+            </div>
+
+            <!-- Email entrega (condicional) -->
+            <div class="form-group hidden" id="email-field">
+              <label class="form-label" for="delivery-email">Email donde recibirás las fotos</label>
+              <input type="email" class="form-input" id="delivery-email" placeholder="tuemail@ejemplo.com" />
+            </div>
+
+            <button type="submit" class="btn-wa" style="width:100%; justify-content:center; font-size:17px; padding:18px;">
+              Continuar al pago →
+            </button>
+
+          </form>
+        </div>
+
+        <!-- Resumen del pedido -->
+        <div class="buy-sidebar">
+          <div class="buy-summary-card">
+            <div class="summary-title">Resumen del pedido</div>
+            <div class="summary-row">
+              <span>Fotos</span>
+              <span id="sum-fotos">4 fotos</span>
+            </div>
+            <div class="summary-row">
+              <span>Modelo</span>
+              <span id="sum-modelo">—</span>
+            </div>
+            <div class="summary-row">
+              <span>Entrega</span>
+              <span id="sum-entrega">WhatsApp</span>
+            </div>
+            <div class="summary-total">
+              <span>Total</span>
+              <div>
+                <div id="sum-soles">S/5.00</div>
+                <div class="summary-total-usd" id="sum-usd">≈ $1.35 USD</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:var(--green-light); border:1px solid #b3eccc; border-radius:var(--radius); padding:20px; font-size:13px; color:var(--gray-dark); line-height:1.6;">
+            <strong style="color:var(--green-dark);">Entrega garantizada en 24-48h</strong><br>
+            Recibes tus fotos profesionales listas para publicar en Instagram y tu tienda online.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECCIÓN PAGO
+  ============================================================ -->
+  <section class="section" id="pago" style="display:none;">
+    <div class="container">
+      <div class="text-center fade-up">
+        <span class="section-label">Último paso</span>
+        <h2 class="section-title">Elige tu método de pago</h2>
+        <p class="section-sub">Pago seguro. Una vez confirmado, comenzamos tu pedido.</p>
+      </div>
+
+      <div style="max-width:580px; margin:48px auto 0;" class="fade-up">
+
+        <!-- Tabs de pago -->
+        <div class="payment-tabs">
+          <button class="pay-tab active" onclick="switchTab('yape')">📱 Yape</button>
+          <button class="pay-tab" onclick="switchTab('plin')">💜 Plin</button>
+          <button class="pay-tab" onclick="switchTab('tarjeta')">💳 Tarjeta</button>
+        </div>
+
+        <!-- Panel Yape -->
+        <div class="pay-panel active" id="panel-yape">
+          <div class="qr-card">
+            <div class="qr-placeholder">📱</div>
+            <!-- ↓ NÚMERO YAPE — EDITAR AQUÍ -->
+            <div class="qr-number" id="yape-num-display">910 004 668</div>
+            <p class="qr-desc">Haz tu transferencia al número Yape indicado.</p>
+            <div class="qr-steps">
+              <div class="qr-step"><div class="qr-step-num">1</div>Abre tu app de Yape</div>
+              <div class="qr-step"><div class="qr-step-num">2</div>Busca el número <strong id="yape-step-num">910004668</strong></div>
+              <div class="qr-step"><div class="qr-step-num">3</div>Transfiere el monto de tu pedido</div>
+              <div class="qr-step"><div class="qr-step-num">4</div>Envía el comprobante por WhatsApp</div>
+            </div>
+            <button
+              class="btn-wa"
+              style="width:100%; justify-content:center; margin-top:24px;"
+              id="yape-confirm-btn"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.526 5.847L.057 23.883a.5.5 0 00.609.61l6.082-1.596A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.807 9.807 0 01-5.035-1.385l-.36-.214-3.733.978.997-3.645-.234-.374A9.769 9.769 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+              </svg>
+              Pagué, enviar comprobante por WhatsApp
+            </button>
+          </div>
+        </div>
+
+        <!-- Panel Plin -->
+        <div class="pay-panel" id="panel-plin">
+          <div class="qr-card">
+            <div class="qr-placeholder">💜</div>
+            <!-- ↓ NÚMERO PLIN — EDITAR AQUÍ -->
+            <div class="qr-number" id="plin-num-display">910 034 407</div>
+            <p class="qr-desc">Transfiere a este número Plin.</p>
+            <div class="qr-steps">
+              <div class="qr-step"><div class="qr-step-num">1</div>Abre tu app bancaria con Plin</div>
+              <div class="qr-step"><div class="qr-step-num">2</div>Elige Plin y busca el número <strong id="plin-step-num">910034407</strong></div>
+              <div class="qr-step"><div class="qr-step-num">3</div>Transfiere el monto de tu pedido</div>
+              <div class="qr-step"><div class="qr-step-num">4</div>Envía el comprobante por WhatsApp</div>
+            </div>
+            <button
+              class="btn-wa"
+              style="width:100%; justify-content:center; margin-top:24px;"
+              id="plin-confirm-btn"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.526 5.847L.057 23.883a.5.5 0 00.609.61l6.082-1.596A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.807 9.807 0 01-5.035-1.385l-.36-.214-3.733.978.997-3.645-.234-.374A9.769 9.769 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+              </svg>
+              Pagué, enviar comprobante por WhatsApp
+            </button>
+          </div>
+        </div>
+
+        <!-- Panel Tarjeta (simulación visual) -->
+        <div class="pay-panel" id="panel-tarjeta">
+          <!-- Tarjeta visual decorativa -->
+          <div class="card-sim">
+            <div class="card-sim-chip">💳</div>
+            <div class="card-sim-number">•••• •••• •••• ••••</div>
+            <div class="card-sim-footer">
+              <span>NOMBRE COMPLETO</span>
+              <span>MM/AA</span>
+            </div>
+          </div>
+
+          <!-- Formulario tarjeta (simulado) -->
+          <div class="card-form-grid">
+            <div class="form-group" style="grid-column:1/-1">
+              <label class="form-label">Número de tarjeta</label>
+              <input class="form-input" type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Titular</label>
+              <input class="form-input" type="text" placeholder="Como en la tarjeta" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Vencimiento</label>
+              <input class="form-input" type="text" placeholder="MM/AA" maxlength="5" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">CVV</label>
+              <input class="form-input" type="text" placeholder="•••" maxlength="4" />
+            </div>
+          </div>
+
+          <div style="background:#fff8e1; border:1px solid #ffe082; border-radius:8px; padding:14px; font-size:13px; color:#555; margin-bottom:20px;">
+            Para pagos con tarjeta, por favor escríbenos por WhatsApp y te enviamos el link de pago seguro.
+          </div>
+
+          <button class="btn-wa" style="width:100%; justify-content:center;" id="card-wa-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.526 5.847L.057 23.883a.5.5 0 00.609.61l6.082-1.596A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.807 9.807 0 01-5.035-1.385l-.36-.214-3.733.978.997-3.645-.234-.374A9.769 9.769 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+            </svg>
+            Solicitar link de pago por WhatsApp
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Mensaje post-pago -->
+      <div class="confirm-section" id="confirm-section">
+        <div class="confirm-icon">🎉</div>
+        <h3 class="confirm-title">¡Gracias por tu compra!</h3>
+        <p class="confirm-desc">
+          Ahora envíanos tu prenda o los detalles de tu pedido por WhatsApp para comenzar a crear tus fotos con modelos IA. Las recibirás en 24 a 48 horas.
+        </p>
+        <button type="button" id="confirm-wa-btn" onclick="abrirWhatsApp()" class="btn-wa" style="justify-content:center; display:inline-flex;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.526 5.847L.057 23.883a.5.5 0 00.609.61l6.082-1.596A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.807 9.807 0 01-5.035-1.385l-.36-.214-3.733.978.997-3.645-.234-.374A9.769 9.769 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+          </svg>
+          Enviar detalles por WhatsApp
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BENEFICIOS
+  ============================================================ -->
+  <section class="section benefits-bg" id="beneficios">
+    <div class="container">
+      <div class="benefits-grid">
+
+        <div>
+          <span class="section-label" style="background:rgba(37,211,102,0.15); color:var(--green);">Por qué elegir CREA AI</span>
+          <h2 class="section-title fade-up" style="color:var(--white);">Ahorra tiempo y dinero</h2>
+          <p class="section-sub fade-up" style="color:rgba(255,255,255,0.6);">Olvídate de los gastos de un estudio fotográfico tradicional.</p>
+
+          <div class="benefit-list" style="margin-top:36px;">
+            <div class="benefit-item fade-up fade-up-d1">
+              <div class="benefit-check">✓</div>
+              <div class="benefit-content">
+                <div class="benefit-title">Sin pagar modelos</div>
+                <div class="benefit-desc">La IA genera modelos profesionales sin costo extra.</div>
+              </div>
+            </div>
+            <div class="benefit-item fade-up fade-up-d2">
+              <div class="benefit-check">✓</div>
+              <div class="benefit-content">
+                <div class="benefit-title">Sin pagar fotógrafos</div>
+                <div class="benefit-desc">No necesitas equipo profesional ni edición costosa.</div>
+              </div>
+            </div>
+            <div class="benefit-item fade-up fade-up-d3">
+              <div class="benefit-check">✓</div>
+              <div class="benefit-content">
+                <div class="benefit-title">Entrega en 24 a 48 horas</div>
+                <div class="benefit-desc">Fotos listas para publicar en tiempo récord.</div>
+              </div>
+            </div>
+            <div class="benefit-item fade-up">
+              <div class="benefit-check">✓</div>
+              <div class="benefit-content">
+                <div class="benefit-title">Ideal para Instagram y tiendas online</div>
+                <div class="benefit-desc">Fotos optimizadas para redes sociales y e-commerce.</div>
+              </div>
+            </div>
+            <div class="benefit-item fade-up">
+              <div class="benefit-check">✓</div>
+              <div class="benefit-content">
+                <div class="benefit-title">Mucho más barato que un estudio</div>
+                <div class="benefit-desc">Desde S/5 por 4 fotos profesionales con modelo IA.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparación -->
+        <div class="compare-card fade-up">
+          <h3 style="font-size:17px; font-weight:700; color:#fff; margin-bottom:24px;">Comparación de costos</h3>
+          <div class="compare-row">
+            <span class="compare-label">4 fotos con modelo</span>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span class="compare-old">S/400+</span>
+              <span class="compare-new">S/5</span>
+              <span class="compare-savings">-99%</span>
+            </div>
+          </div>
+          <div class="compare-row">
+            <span class="compare-label">Alquiler de estudio</span>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span class="compare-old">S/200+</span>
+              <span class="compare-new">S/0</span>
+              <span class="compare-savings">Gratis</span>
+            </div>
+          </div>
+          <div class="compare-row">
+            <span class="compare-label">Fotógrafo profesional</span>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span class="compare-old">S/300+</span>
+              <span class="compare-new">S/0</span>
+              <span class="compare-savings">Gratis</span>
+            </div>
+          </div>
+          <div class="compare-row">
+            <span class="compare-label">Edición de fotos</span>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span class="compare-old">S/100+</span>
+              <span class="compare-new">Incluido</span>
+            </div>
+          </div>
+          <div class="compare-row">
+            <span class="compare-label">Tiempo de entrega</span>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span class="compare-old">1 semana</span>
+              <span class="compare-new">24-48h</span>
+            </div>
+          </div>
+          <div style="background:rgba(37,211,102,0.1); border:1px solid rgba(37,211,102,0.3); border-radius:10px; padding:16px; margin-top:24px; text-align:center;">
+            <div style="font-size:13px; color:rgba(255,255,255,0.5); margin-bottom:6px;">Ahorro total estimado</div>
+            <div style="font-size:32px; font-weight:900; color:var(--green);">S/995+</div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.4); margin-top:4px;">Por sesión vs. fotografía tradicional</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CONTACTO
+  ============================================================ -->
+  <section class="section" id="contacto">
+    <div class="container">
+      <div class="contact-box fade-up">
+        <span class="section-label">Contáctanos</span>
+        <h2 class="section-title">¿Quieres empezar?</h2>
+        <p class="section-sub" style="margin: 0 auto 36px;">
+          Escríbenos por WhatsApp y envíanos tu ropa para crear tus fotos con modelos IA. Respondemos en minutos.
+        </p>
+        <button type="button" onclick="abrirWhatsApp()" class="btn-wa" style="font-size:18px; padding:20px 40px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.526 5.847L.057 23.883a.5.5 0 00.609.61l6.082-1.596A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.807 9.807 0 01-5.035-1.385l-.36-.214-3.733.978.997-3.645-.234-.374A9.769 9.769 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+          </svg>
+          Escribir por WhatsApp
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECCIÓN CONFIANZA — POR QUÉ USAR CREA AI
+  ============================================================ -->
+  <section class="section trust-bg" id="confianza">
+    <div class="container">
+      <div class="text-center fade-up">
+        <span class="section-label">Por qué elegir CREA AI</span>
+        <h2 class="section-title">Todo lo que necesitas para vender más ropa</h2>
+        <p class="section-sub">Sin complicaciones, sin gastos innecesarios. Solo fotos profesionales que convierten.</p>
+      </div>
+
+      <div class="trust-grid">
+
+        <!-- Más barato -->
+        <div class="trust-card fade-up fade-up-d1">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#128C7E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+              <path d="M9 10h6"/>
+            </svg>
+          </div>
+          <div class="trust-title">Mucho más barato</div>
+          <div class="trust-desc">Desde S/5 por 4 fotos. Un estudio tradicional cuesta S/400 o más por sesión.</div>
+        </div>
+
+        <!-- Entrega rápida -->
+        <div class="trust-card fade-up fade-up-d2">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#128C7E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </div>
+          <div class="trust-title">Entrega en 24 a 48h</div>
+          <div class="trust-desc">Olvídate de esperar semanas. Tus fotos estarán listas en tiempo récord.</div>
+        </div>
+
+        <!-- Fotos profesionales -->
+        <div class="trust-card fade-up fade-up-d3">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#128C7E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+            </svg>
+          </div>
+          <div class="trust-title">Fotos profesionales</div>
+          <div class="trust-desc">Calidad de estudio sin el costo. La IA genera imágenes perfectas para cualquier plataforma.</div>
+        </div>
+
+        <!-- Tiendas online -->
+        <div class="trust-card fade-up fade-up-d1">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#128C7E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <div class="trust-title">Ideal para tiendas online</div>
+          <div class="trust-desc">Optimizadas para Instagram, TikTok, Shopify, Mercado Libre y cualquier e-commerce.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">CREA <span>AI</span></div>
+          <div class="footer-desc">Fotos profesionales con modelos IA para marcas de ropa.</div>
+        </div>
+        <button type="button" onclick="abrirWhatsApp()" class="footer-wa">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.526 5.847L.057 23.883a.5.5 0 00.609.61l6.082-1.596A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.807 9.807 0 01-5.035-1.385l-.36-.214-3.733.978.997-3.645-.234-.374A9.769 9.769 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+          </svg>
+          WhatsApp
+        </button>
+      </div>
+      <div class="footer-copy">
+        &copy; 2025 CREA AI. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    /* ================================================================
+       CONFIGURACIÓN — EDITAR AQUÍ
+       Cambia solo los valores de las variables siguientes.
+    ================================================================ */
+
+    // NÚMERO DE WHATSAPP (incluye código de país, sin + ni espacios)
+    // Perú: 51 + número. Ej: 51906034407
+    const WA_NUMBER = '51906034407';
+
+    // MENSAJE AUTOMÁTICO DE WHATSAPP
+    const WA_MESSAGE = 'Hola, quiero crear fotos con modelos IA para mi marca de ropa.';
+
+    // NÚMERO YAPE
+    const YAPE_NUMBER = '910004668';
+
+    // NÚMERO PLIN
+    const PLIN_NUMBER = '910034407';
+
+    // PRECIO BASE (soles por 4 fotos)
+    const PRECIO_BASE_SOLES = 5;
+    const FOTOS_BASE = 4;
+
+    // TIPO DE CAMBIO APROXIMADO (S/ por USD)
+    const TIPO_CAMBIO = 3.70;
+
+    /* ================================================================
+       ZONA DE FOTOS — CAMBIA TUS IMÁGENES AQUÍ
+       ----------------------------------------------------------------
+       INSTRUCCIONES PARA CAMBIAR UNA FOTO:
+       1. Busca el nombre del cuadro que quieres cambiar (ej: "Mujer Elegante")
+       2. Reemplaza la URL que está entre las comillas ' '
+       3. Guarda el archivo
+       ----------------------------------------------------------------
+       CÓMO OBTENER UNA URL DE IMAGEN:
+       - Sube tu foto a Google Drive, Dropbox o Imgur
+       - Copia el enlace directo de la imagen (debe terminar en .jpg o .png)
+       - Pégala entre las comillas
+       ================================================================ */
+    const FOTOS = {
+
+      // ── HERO (imagen grande de la portada) ──────────────────────────
+      hero_principal:  'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=680&h=280&fit=crop&crop=top',
+      hero_streetwear: 'file:///C:/Users/tbeto/Desktop/TRABAJOS/imagenes/POLO%20TOK.png',
+      hero_fitness:    'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=320&h=160&fit=crop&crop=top',
+
+      // ── GALERÍA DE EJEMPLOS ─────────────────────────────────────────
+      ejemplo_mujer_elegante: 'file:///C:/Users/tbeto/Desktop/TRABAJOS/imagenes/1%20MR.png',
+      ejemplo_streetwear:     'https://images.unsplash.com/photo-1520975922203-b5a49c2f7c87?w=480&h=600&fit=crop&crop=top',
+      ejemplo_casual:         'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=480&h=600&fit=crop&crop=top',
+      ejemplo_fitness:        'https://images.unsplash.com/photo-1571019613914-85f342c6a11e?w=480&h=600&fit=crop&crop=top',
+      ejemplo_hombre_moderno: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=480&h=600&fit=crop&crop=top',
+      ejemplo_influencer:     'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=480&h=600&fit=crop&crop=top',
+
+      // ── TARJETAS DE MODELOS IA ──────────────────────────────────────
+      modelo_mujer_elegante:  'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=480&h=600&fit=crop&crop=top',
+      modelo_hombre_moderno:  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=480&h=600&fit=crop&crop=top',
+      modelo_streetwear:      'https://images.unsplash.com/photo-1544441893-675973e31985?w=480&h=600&fit=crop&crop=top',
+      modelo_fitness:         'https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?w=480&h=600&fit=crop&crop=top',
+      modelo_casual:          'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=480&h=600&fit=crop&crop=top',
+      modelo_influencer:      'https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?w=480&h=600&fit=crop&crop=top',
+
+    };
+
+    /* Aplica automáticamente las URLs del objeto FOTOS a cada imagen.
+       No toques esta función — solo edita el objeto FOTOS de arriba. */
+    function aplicarFotos() {
+      const mapa = [
+        // [id del elemento, clave en FOTOS]
+        ['img-hero-principal',         'hero_principal'],
+        ['img-hero-streetwear',        'hero_streetwear'],
+        ['img-hero-fitness',           'hero_fitness'],
+        ['img-ejemplo-mujer-elegante', 'ejemplo_mujer_elegante'],
+        ['img-ejemplo-streetwear',     'ejemplo_streetwear'],
+        ['img-ejemplo-casual',         'ejemplo_casual'],
+        ['img-ejemplo-fitness',        'ejemplo_fitness'],
+        ['img-ejemplo-hombre-moderno', 'ejemplo_hombre_moderno'],
+        ['img-ejemplo-influencer',     'ejemplo_influencer'],
+        ['img-modelo-mujer-elegante',  'modelo_mujer_elegante'],
+        ['img-modelo-hombre-moderno',  'modelo_hombre_moderno'],
+        ['img-modelo-streetwear',      'modelo_streetwear'],
+        ['img-modelo-fitness',         'modelo_fitness'],
+        ['img-modelo-casual',          'modelo_casual'],
+        ['img-modelo-influencer',      'modelo_influencer'],
+      ];
+      mapa.forEach(([id, clave]) => {
+        const el = document.getElementById(id);
+        if (el && FOTOS[clave]) el.src = FOTOS[clave];
+      });
+    }
+
+    /* ================================================================
+       WHATSAPP — función global única
+       Usa api.whatsapp.com (más compatible que wa.me en Firefox/PC).
+       target="_blank" + rel="noopener noreferrer" para máxima compatibilidad.
+       Para cambiar número: modifica WA_NUMBER arriba.
+    ================================================================ */
+    function abrirWhatsApp(msg) {
+      const texto = msg || WA_MESSAGE;
+      // api.whatsapp.com funciona tanto en PC como en celular sin errores de iframe
+      const url = 'https://api.whatsapp.com/send?phone=' + WA_NUMBER + '&text=' + encodeURIComponent(texto);
+      const a = document.createElement('a');
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    /* ================================================================
+       FUNCIÓN AUXILIAR — genera URL de WhatsApp (para usos internos)
+    ================================================================ */
+    function waLink(msg) {
+      const texto = msg || WA_MESSAGE;
+      return 'https://api.whatsapp.com/send?phone=' + WA_NUMBER + '&text=' + encodeURIComponent(texto);
+    }
+
+    /* ================================================================
+       INICIALIZACIÓN — solo asigna los números de Yape/Plin en pantalla
+    ================================================================ */
+    function initWaLinks() {
+      // Botones Yape y Plin — mensaje incluye método de pago
+      const yapeBtn = document.getElementById('yape-confirm-btn');
+      const plinBtn = document.getElementById('plin-confirm-btn');
+      if (yapeBtn) yapeBtn.onclick = () => abrirWhatsApp('Hola, acabo de pagar por Yape. Te envío el comprobante para mi pedido de fotos con modelos IA.');
+      if (plinBtn) plinBtn.onclick = () => abrirWhatsApp('Hola, acabo de pagar por Plin. Te envío el comprobante para mi pedido de fotos con modelos IA.');
+
+      // Botón tarjeta
+      const cardBtn = document.getElementById('card-wa-btn');
+      if (cardBtn) cardBtn.onclick = () => abrirWhatsApp('Hola, quiero pagar con tarjeta. ¿Me puedes enviar el link de pago seguro?');
+
+      // Números Yape y Plin en pantalla
+      const yapeDisplay = document.getElementById('yape-num-display');
+      const plinDisplay = document.getElementById('plin-num-display');
+      const yapeStep    = document.getElementById('yape-step-num');
+      const plinStep    = document.getElementById('plin-step-num');
+      if (yapeDisplay) yapeDisplay.textContent = YAPE_NUMBER.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3');
+      if (plinDisplay) plinDisplay.textContent = PLIN_NUMBER.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3');
+      if (yapeStep)    yapeStep.textContent    = YAPE_NUMBER;
+      if (plinStep)    plinStep.textContent    = PLIN_NUMBER;
+    }
+
+    /* ================================================================
+       CALCULADORA DE PRECIOS
+    ================================================================ */
+    let fotosSeleccionadas = 4;
+
+    function calcPrecio(fotos) {
+      const soles = (PRECIO_BASE_SOLES / FOTOS_BASE) * fotos;
+      const usd   = soles / TIPO_CAMBIO;
+      return { soles, usd };
+    }
+
+    function selectFotos(btn, fotos) {
+      fotosSeleccionadas = fotos;
+
+      // Botones
+      document.querySelectorAll('.price-option').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Mostrar precios
+      const { soles, usd } = calcPrecio(fotos);
+      document.getElementById('price-main').textContent = `S/${soles.toFixed(0)}`;
+      document.getElementById('price-usd').textContent  = `≈ $${usd.toFixed(2)} USD`;
+      document.getElementById('total-fotos').textContent = `${fotos} fotos`;
+      document.getElementById('total-soles').textContent = `S/${soles.toFixed(2)}`;
+      document.getElementById('total-dollars').textContent = `≈ $${usd.toFixed(2)} USD`;
+
+      // Actualizar mensaje del botón de precio con detalle del pedido seleccionado
+      const priceBtn = document.getElementById('price-wa-btn');
+      if (priceBtn) {
+        const msgFotos = `Hola, quiero ${fotos} fotos con modelos IA. Total: S/${soles.toFixed(2)} (≈ $${usd.toFixed(2)} USD).`;
+        priceBtn.onclick = () => abrirWhatsApp(msgFotos);
+      }
+    }
+
+    /* ================================================================
+       RESUMEN DEL PEDIDO (sección Comprar)
+    ================================================================ */
+    function updateSummary() {
+      const sel    = document.getElementById('cantidad-fotos');
+      const fotos  = parseInt(sel ? sel.value : 4);
+      const modelo = document.getElementById('modelo-type');
+      const entrega = document.querySelector('input[name="delivery"]:checked');
+
+      const { soles, usd } = calcPrecio(fotos);
+
+      const modeloLabels = {
+        'mujer-elegante': 'Mujer Elegante',
+        'streetwear': 'Streetwear',
+        'casual': 'Casual',
+        'fitness': 'Fitness',
+        'hombre-moderno': 'Hombre Moderno',
+        'influencer': 'Influencer',
+      };
+
+      const sumFotos   = document.getElementById('sum-fotos');
+      const sumModelo  = document.getElementById('sum-modelo');
+      const sumEntrega = document.getElementById('sum-entrega');
+      const sumSoles   = document.getElementById('sum-soles');
+      const sumUsd     = document.getElementById('sum-usd');
+
+      if (sumFotos)   sumFotos.textContent   = `${fotos} fotos`;
+      if (sumModelo)  sumModelo.textContent   = modelo && modelo.value ? modeloLabels[modelo.value] || modelo.value : '—';
+      if (sumEntrega) sumEntrega.textContent  = entrega ? (entrega.value === 'whatsapp' ? 'WhatsApp' : 'Email') : 'WhatsApp';
+      if (sumSoles)   sumSoles.textContent    = `S/${soles.toFixed(2)}`;
+      if (sumUsd)     sumUsd.textContent      = `≈ $${usd.toFixed(2)} USD`;
+    }
+
+    /* ================================================================
+       TOGGLE ENTREGA (WhatsApp / Email)
+    ================================================================ */
+    function toggleDelivery(value) {
+      const emailField = document.getElementById('email-field');
+      const waField    = document.getElementById('wa-number-field');
+      if (value === 'email') {
+        emailField.classList.remove('hidden');
+        waField.classList.add('hidden');
+      } else {
+        emailField.classList.add('hidden');
+        waField.classList.remove('hidden');
+      }
+      updateSummary();
+    }
+
+    /* ================================================================
+       SUBMIT FORMULARIO DE PEDIDO
+    ================================================================ */
+    function submitOrder(e) {
+      e.preventDefault();
+
+      const fotos   = document.getElementById('cantidad-fotos').value;
+      const modelo  = document.getElementById('modelo-type').value;
+      const email   = document.getElementById('user-email').value;
+      const entrega = document.querySelector('input[name="delivery"]:checked');
+      const entregaVal = entrega ? entrega.value : 'whatsapp';
+
+      const { soles, usd } = calcPrecio(parseInt(fotos));
+
+      // Guardar email si elige entrega por email
+      if (entregaVal === 'email') {
+        const deliveryEmail = document.getElementById('delivery-email').value;
+        try {
+          localStorage.setItem('creaai_delivery_email', deliveryEmail || email);
+        } catch(err) {}
+      }
+
+      // Mostrar sección de pago
+      const paySection = document.getElementById('pago');
+      if (paySection) {
+        paySection.style.display = 'block';
+        setTimeout(() => paySection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+      }
+
+      // Actualizar botón confirmación con detalles del pedido
+      const msgPedido = `Hola, hice mi pedido: ${fotos} fotos, modelo ${modelo}, entrega por ${entregaVal}. Total: S/${soles.toFixed(2)} (≈ $${usd.toFixed(2)} USD). Email: ${email}`;
+      const confirmBtn = document.getElementById('confirm-wa-btn');
+      if (confirmBtn) {
+        confirmBtn.onclick = () => abrirWhatsApp(msgPedido);
+      }
+    }
+
+    /* ================================================================
+       TABS DE PAGO
+    ================================================================ */
+    function switchTab(tab) {
+      document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.pay-panel').forEach(p => p.classList.remove('active'));
+      event.target.classList.add('active');
+      const panel = document.getElementById(`panel-${tab}`);
+      if (panel) panel.classList.add('active');
+    }
+
+    // Mostrar confirmación al hacer clic en botones de pago Yape/Plin
+    function showConfirm() {
+      const confirmSection = document.getElementById('confirm-section');
+      if (confirmSection) {
+        confirmSection.classList.add('visible');
+        confirmSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    /* ================================================================
+       PREVIEW IMAGEN SUBIDA
+    ================================================================ */
+    function previewImage(input) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const preview = document.getElementById('upload-preview');
+          const img     = document.getElementById('preview-img');
+          if (preview && img) {
+            img.src = e.target.result;
+            preview.style.display = 'block';
+          }
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    /* ================================================================
+       DRAG & DROP EN ZONA DE UPLOAD
+    ================================================================ */
+    const uploadZone = document.getElementById('upload-zone');
+    if (uploadZone) {
+      uploadZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadZone.classList.add('dragover');
+      });
+      uploadZone.addEventListener('dragleave', () => {
+        uploadZone.classList.remove('dragover');
+      });
+      uploadZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadZone.classList.remove('dragover');
+        const files = e.dataTransfer.files;
+        const fileInput = document.getElementById('ropa-file');
+        if (files.length > 0 && fileInput) {
+          fileInput.files = files;
+          previewImage(fileInput);
+        }
+      });
+    }
+
+    /* ================================================================
+       FORMATO NÚMERO TARJETA
+    ================================================================ */
+    function formatCard(input) {
+      let value = input.value.replace(/\D/g, '');
+      value = value.match(/.{1,4}/g)?.join(' ') || value;
+      input.value = value;
+    }
+
+    /* ================================================================
+       NAVBAR SCROLL
+    ================================================================ */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    /* ================================================================
+       MENÚ HAMBURGUESA
+    ================================================================ */
+    const burger   = document.getElementById('burger');
+    const navMobile = document.getElementById('nav-mobile');
+
+    burger.addEventListener('click', () => {
+      navMobile.classList.toggle('open');
+    });
+
+    function closeMobile() {
+      navMobile.classList.remove('open');
+    }
+
+    /* ================================================================
+       ANIMACIONES FADE-UP AL HACER SCROLL
+    ================================================================ */
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    fadeEls.forEach(el => observer.observe(el));
+
+    /* ================================================================
+       ACTUALIZAR RESUMEN cuando cambia el modelo seleccionado
+    ================================================================ */
+    const modeloSelect  = document.getElementById('modelo-type');
+    const cantidadSelect = document.getElementById('cantidad-fotos');
+    if (modeloSelect)   modeloSelect.addEventListener('change', updateSummary);
+    if (cantidadSelect) cantidadSelect.addEventListener('change', updateSummary);
+
+    /* ================================================================
+       USAR MODELO — conecta tarjeta de modelo con el formulario de compra
+    ================================================================ */
+    function usarModelo(nombreModelo) {
+      // Mapeo de nombre visible → valor del select
+      const modeloMap = {
+        'Mujer Elegante':         'mujer-elegante',
+        'Hombre Moderno':         'hombre-moderno',
+        'Streetwear':             'streetwear',
+        'Fitness':                'fitness',
+        'Casual':                 'casual',
+        'Influencer / Instagram': 'influencer',
+      };
+      const val = modeloMap[nombreModelo];
+      const select = document.getElementById('modelo-type');
+      if (select && val) {
+        select.value = val;
+        updateSummary();
+      }
+      // Desplazar al formulario de compra
+      const comprar = document.getElementById('comprar');
+      if (comprar) comprar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    /* ================================================================
+       INICIALIZAR TODO
+    ================================================================ */
+    aplicarFotos();
+    initWaLinks();
+    updateSummary();
+  </script>
+
+</body>
+</html>
