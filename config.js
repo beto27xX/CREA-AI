@@ -24,7 +24,7 @@
 const FOTOS = {
 
   // ── PORTADA (hero) ─────────────────────────────────────────────
-  hero_principal:  'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=680&h=280&fit=crop&crop=top',
+  hero_principal:  'https://imgur.com/gallery/mujer-elegante-s5hgsAP',
   hero_streetwear: 'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=320&h=160&fit=crop&crop=top',
   hero_fitness:    'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=320&h=160&fit=crop&crop=top',
 
