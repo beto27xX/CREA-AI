@@ -29,17 +29,17 @@ const FOTOS = {
   hero_fitness:    'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=320&h=160&fit=crop&crop=top',
 
   // ── GALERÍA DE EJEMPLOS ────────────────────────────────────────
-  ejemplo_mujer_elegante: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=480&h=600&fit=crop&crop=top',
-  ejemplo_streetwear:     'https://images.unsplash.com/photo-1520975922203-b5a49c2f7c87?w=480&h=600&fit=crop&crop=top',
-  ejemplo_casual:         'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=480&h=600&fit=crop&crop=top',
+  ejemplo_mujer_elegante: 'https://i.imgur.com/0vclnh4.jpeg',
+  ejemplo_streetwear:     'https://i.imgur.com/goCM6yX.jpeg',
+  ejemplo_casual:         'https://i.imgur.com/40obeo0.jpeg',
   ejemplo_fitness:        'https://images.unsplash.com/photo-1571019613914-85f342c6a11e?w=480&h=600&fit=crop&crop=top',
-  ejemplo_hombre_moderno: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=480&h=600&fit=crop&crop=top',
-  ejemplo_influencer:     'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=480&h=600&fit=crop&crop=top',
+  ejemplo_hombre_moderno: 'https://i.imgur.com/iRoXaXu.jpeg',
+  ejemplo_influencer:     'https://i.imgur.com/tvTGlhu.jpeg',
 
   // ── TARJETAS DE MODELOS IA ─────────────────────────────────────
   modelo_mujer_elegante: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=480&h=600&fit=crop&crop=top',
-  modelo_hombre_moderno: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=480&h=600&fit=crop&crop=top',
-  modelo_streetwear:     'https://images.unsplash.com/photo-1544441893-675973e31985?w=480&h=600&fit=crop&crop=top',
+  modelo_hombre_moderno: 'https://i.imgur.com/NlStSk6.jpeg',
+  modelo_streetwear:     'https://i.imgur.com/mZoI0lV.jpeg',
   modelo_fitness:        'https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?w=480&h=600&fit=crop&crop=top',
   modelo_casual:         'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=480&h=600&fit=crop&crop=top',
   modelo_influencer:     'https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?w=480&h=600&fit=crop&crop=top',
