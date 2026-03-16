@@ -24,7 +24,7 @@
 const FOTOS = {
 
   // ── PORTADA (hero) ─────────────────────────────────────────────
-  hero_principal:  '![image alt](https://github.com/beto27xX/CREA-AI/blob/c9eb5c21dd9d654fb022a32fae989a3bacc51f54/imagen.png)',
+  hero_principal:  'https://i.imgur.com/Mv624bp.jpeg',
   hero_streetwear: '![image alt](https://github.com/beto27xX/CREA-AI/blob/c9eb5c21dd9d654fb022a32fae989a3bacc51f54/imagen.png)',
   hero_fitness:    'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=320&h=160&fit=crop&crop=top',
 
